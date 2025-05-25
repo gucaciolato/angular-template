@@ -1,226 +1,153 @@
-# My App – Angular 19.2 (stand‑alone)
+# Angular Project Template
 
-> Projeto front‑end em **Angular 19.2** com SSR, Jest, ESLint + Prettier, Husky + lint‑staged e Conventional Commits. Orientado a componentes stand‑alone e melhores práticas de clean code.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
+Um template robusto e moderno para iniciar novos projetos Angular, apresentando uma arquitetura de componentes standalone, Server-Side Rendering (SSR) e um conjunto abrangente de ferramentas de desenvolvimento.
 
-## 📋 Sumário
+**Repositório:** [https://github.com/gucaciolato/angular-template](https://github.com/gucaciolato/angular-template)
 
-1. [Pré‑requisitos](#pré‑requisitos)
-2. [Instalação](#instalação)
-3. [Comandos NPM](#comandos-npm)
-4. [Estrutura de Pastas](#estrutura-de-pastas)
-5. [Lint & Formatação](#lint--formatação)
-6. [Testes](#testes)
-7. [Fluxo de Commits](#fluxo-de-commits)
-8. [Renderização no Servidor (SSR)](#renderização-no-servidor-ssr)
-9. [CI/CD Sugerido](#cicd-sugerido)
-10. [Contribuição](#contribuição)
-11. [Licença](#licença)
+## ✨ Funcionalidades
 
----
+*   **Angular (v19.2+):** Utilizando a versão mais recente do Angular com foco em componentes standalone.
+*   **Arquitetura de Componentes Standalone:** Simplifica a estrutura do projeto e melhora a modularidade.
+*   **Server-Side Rendering (SSR):** Pré-renderização no servidor com Angular Universal para melhor SEO e performance inicial.
+*   **Testes Unitários e de Componentes com Jest:** Configuração pronta para testes eficientes e rápidos.
+*   **Qualidade de Código com ESLint e Prettier:**
+    *   ESLint (v9+ com Flat Config) para análise estática de código.
+    *   Prettier para formatação automática de código, garantindo um estilo consistente.
+*   **Git Hooks com Husky e lint-staged:** Automação de verificações de lint e formatação antes de cada commit.
+*   **Conventional Commits:** Padronização de mensagens de commit com `commitlint` e `cz-git` para um histórico de versionamento claro e significativo.
+*   **Configuração de Ambiente:** Estrutura para gerenciar diferentes configurações de ambiente (desenvolvimento, produção, etc.).
+*   **Estrutura de Projeto Organizada:** Uma sugestão de organização de pastas para escalabilidade.
+*   **Otimizado para PWA (Progressive Web App):** Configurações básicas para transformar sua aplicação em um PWA.
 
-## Pré‑requisitos
+## 🛠️ Tecnologias Utilizadas
 
-| Ferramenta  | Versão recomendada                                               |
-| ----------- | ---------------------------------------------------------------- |
-| **Node.js** | 20.x LTS (Husky requer `core.hooksPath`, Jest roda melhor em 20) |
-| **npm**     | ≥ 10.x (ou `pnpm` ≥ 9)                                           |
-| **Git**     | ≥ 2.40 (hooks Husky)                                             |
+*   Angular
+*   TypeScript
+*   Angular Universal (SSR)
+*   Jest
+*   ESLint
+*   Prettier
+*   Husky
+*   lint-staged
+*   commitlint
+*   cz-git (para `npm run commit`)
+*   Node.js (para SSR e ferramentas de build)
 
-> Dica: use **Volta** ou **nvm** para gerenciar múltiplas versões do Node.
+## 📋 Pré-requisitos
 
----
+Antes de começar, certifique-se de ter instalado:
 
-## Instalação
+*   Node.js (versão LTS recomendada, ex: v18.x ou v20.x)
+*   npm (geralmente vem com o Node.js) ou Yarn ou pnpm
+*   Angular CLI globalmente:
+    ```bash
+    npm install -g @angular/cli
+    ```
 
-```bash
-# clone o repositório
-$ git clone https://github.com/sua-org/my-app.git
-$ cd my-app
+## 🚀 Começando
 
-# instale dependências
-$ npm ci          # uso recomendável para builds reprodutíveis
+1.  **Use este template:**
+    *   Clique no botão "**Use this template**" no topo da página do repositório gucaciolato/angular-template.
+    *   Ou clone o repositório diretamente:
+        ```bash
+        git clone https://github.com/gucaciolato/angular-template.git nome-do-seu-projeto
+        cd nome-do-seu-projeto
+        ```
 
-# configure hooks do Husky (roda automaticamente via script prepare)
-$ npm run prepare # apenas se o diretório .husky/ ainda não existir
-```
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    # ou yarn install
+    # ou pnpm install
+    ```
 
-> ℹ️ Se o comando `prepare` já foi executado uma vez (ou se veio comprometido), não é necessário repeti‑lo.
+3.  **Execute o servidor de desenvolvimento:**
+    ```bash
+    npm start
+    # ou ng serve
+    ```
+    Acesse `http://localhost:4200/` no seu navegador. A aplicação será recarregada automaticamente se você alterar qualquer um dos arquivos de origem. Para o modo SSR em desenvolvimento, use `npm run dev:ssr`.
 
----
+## 📜 Scripts Disponíveis
 
-## Comandos NPM
+No diretório do projeto, você pode executar:
 
-| Script                     | Descrição                                                           |
-| -------------------------- | ------------------------------------------------------------------- |
-| `npm start`                | Levanta o dev‑server em `http://localhost:4200/` com HMR.           |
-| `npm run watch`            | Build contínuo sob `dist/` em modo dev.                             |
-| `npm run build`            | Build production (AOT, minificação, budgets). Artefatos em `dist/`. |
-| `npm run serve:ssr:my-app` | Executa o bundle SSR (`node dist/my-app/server/server.mjs`).        |
-| `npm test`                 | Executa o Jest uma vez.                                             |
-| `npm run test:watch`       | Modo watch do Jest.                                                 |
-| `npm run test:ci`          | Jest serial (runInBand) para CI.                                    |
-| `npm run lint`             | ESLint com máxima severidade (`--max-warnings=0`).                  |
-| `npm run format`           | Prettier – formata arquivos suportados.                             |
-| `npm run commit`           | Prompt interativo **cz‑git** para Conventional Commits.             |
+*   `npm start` ou `ng serve`: Inicia o servidor de desenvolvimento (Client-Side Rendering).
+*   `npm run dev:ssr`: Inicia o servidor de desenvolvimento com SSR ativado.
+*   `npm run build`: Compila a aplicação para produção na pasta `dist/nome-do-projeto/browser`.
+*   `npm run build:ssr`: Compila a aplicação para produção com SSR (saídas em `dist/nome-do-projeto/browser` e `dist/nome-do-projeto/server`).
+*   `npm run serve:ssr`: Executa a aplicação compilada com SSR.
+*   `npm test`: Executa os testes unitários e de componentes com Jest.
+*   `npm run test:watch`: Executa os testes em modo de observação.
+*   `npm run lint`: Analisa o código com ESLint.
+*   `npm run lint:fix`: Tenta corrigir automaticamente os problemas de lint.
+*   `npm run format`: Formata o código com Prettier.
+*   `npm run commit`: Inicia o prompt interativo (`cz-git`) para criar mensagens de commit seguindo o padrão Conventional Commits.
+*   `npm run prepare`: (Executado automaticamente após `npm install`) Instala os hooks do Husky.
 
----
-
-## Estrutura de Pastas
+## 📂 Estrutura do Projeto (Sugestão)
 
 ```
 my-app/
-├─ src/
-│  ├─ app/                 # stand‑alone components & SCAMs
-│  │  ├─ core/             # singletons (guards, interceptors)
-│  │  ├─ shared/           # UI primitives, directives, pipes
-│  │  └─ features/         # lazy‑loaded feature folders
-│  ├─ assets/              # imagens, fontes, i18n JSONs
-│  ├─ environments/        # env.ts / env.development.ts
-│  └─ server.ts            # bootstrap SSR
-├─ jest.config.ts
-├─ eslint.config.mjs
-├─ .husky/
-└─ …
+├── .husky/                   # Configurações do Husky para Git Hooks
+├── .vscode/                  # Configurações recomendadas para VS Code
+├── dist/                     # Arquivos de build para produção
+├── node_modules/             # Dependências do projeto
+├── src/
+│   ├── app/                  # Código principal da aplicação
+│   │   ├── core/             # Módulos core, singletons, guards, interceptors (se não standalone)
+│   │   ├── features/         # Módulos/componentes de funcionalidades específicas
+│   │   ├── shared/           # Componentes, diretivas e pipes reutilizáveis
+│   │   ├── app.component.*   # Componente raiz (standalone)
+│   │   ├── app.config.ts     # Configuração da aplicação (providers para standalone)
+│   │   ├── app.routes.ts     # Rotas principais da aplicação (standalone)
+│   │   └── ...
+│   ├── assets/               # Arquivos estáticos (imagens, fontes, etc.)
+│   ├── environments/         # Arquivos de configuração de ambiente
+│   ├── main.ts               # Ponto de entrada principal da aplicação (client-side)
+│   ├── main.server.ts        # Ponto de entrada principal da aplicação (server-side)
+│   ├── styles.scss           # Estilos globais (ou .css)
+│   └── index.html            # HTML principal
+├── .editorconfig             # Configurações de editor
+<!-- Note: Ensure all external references comply with licensing requirements -->
+├── .eslintignore             # Arquivos a serem ignorados pelo ESLint
+├── .eslintrc.json            # Configuração do ESLint (ou eslint.config.js para Flat Config)
+├── .gitignore                # Arquivos ignorados pelo Git
+├── .prettierignore           # Arquivos a serem ignorados pelo Prettier
+├── .prettierrc.json          # Configuração do Prettier
+├── angular.json              # Configuração do workspace e projetos Angular CLI
+├── commitlint.config.js      # Configuração do Commitlint
+├── jest.config.js            # Configuração do Jest
+├── jest.preset.js            # Preset do Jest para Angular
+├── LICENSE                   # Licença do projeto
+├── package-lock.json         # Lockfile de dependências npm
+├── package.json              # Metadados e dependências do projeto
+├── README.md                 # Este arquivo
+├── server.ts                 # Script do servidor Express para SSR
+└── tsconfig.*.json           # Configurações do TypeScript
 ```
 
-> **Stand‑alone First** 🏆 – todos os componentes, pipes e directives são `standalone: true`. Use SCAM (Single Component Angular Module) apenas se precisar de `providers` locais.
+## 📄 Convenções
+
+*   **Mensagens de Commit:** Siga o padrão Conventional Commits. Use `npm run commit` para ajuda.
+*   **Estilo de Código:** Mantido automaticamente por ESLint e Prettier através dos Git Hooks (Husky + lint-staged).
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma *issue* ou enviar um *pull request*.
+
+1.  Faça um Fork do projeto
+2.  Crie uma Branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3.  Faça o Commit de suas mudanças (`npm run commit`)
+4.  Faça o Push para a Branch (`git push origin feature/AmazingFeature`)
+5.  Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 ---
 
-## Lint & Formatação
-
-* ESLint v9 + Flat Config (`eslint.config.mjs`).
-* Regra **`@angular-eslint/prefer-standalone`** ⚠️ (erro se alguém criar NgModule desnecessário).
-* Prettier 3 integrado via `eslint-plugin-prettier` – formatação vira erro de linter.
-* Hooks Husky:
-
-  * **pre‑commit** → `lint-staged` → `prettier --write` + `eslint --fix` + testes relacionados (`jest --findRelatedTests`).
-  * **commit‑msg** → `commitlint` (Conventional Commits).
-
-### Rodando manualmente
-
-```bash
-# lint estrito
-npm run lint
-# formata tudo
-npm run format
-```
-
----
-
-## Testes
-
-| Camada         | Ferramenta                         | Observações                                 |
-| -------------- | ---------------------------------- | ------------------------------------------- |
-| Unitários      | **Jest** + `jest-preset-angular`   | JSDOM, cobertura integrada (`coverage/`).   |
-| Componentes    | `@angular-builders/jest` + TestBed | Inclui suporte a `ComponentHarness`.        |
-| E2E (opcional) | Playwright ou Cypress              | Não incluído; sugerido adicionar em `e2e/`. |
-
-> Use `npm test -- -u` para atualizar *snapshots* de componentes.
-
----
-
-## Fluxo de Commits
-
-> Este projeto adota **Conventional Commits 1.0.0** para manter um histórico semântico e facilitar changelogs automáticos.
-
-1. **git add** arquivos → hook **pre‑commit** executa `lint-staged` (Prettier + ESLint + jest –related).
-2. Execute **`npm run commit`** → prompt **cz‑git** (PT‑BR) auxilia na escolha de tipo, escopo e mensagem.
-3. Hook **commit‑msg** valida a mensagem via `commitlint`.
-4. Push dispara o pipeline **CI** (lint + testes + build).
-
-### 🗂️ Modelo de mensagem
-
-```text
-<tipo>(<escopo opcional>): <resumo no imperativo>
-
-<corpo descritivo opcional — explique *porquê* e *como*>
-
-BREAKING CHANGE: <descrição da quebra de compatibilidade>
-```
-
-* **Resumo ≤ 50 chars**, verbo no imperativo ("adicionar", "corrigir").
-* Corpos longos: quebre linhas em ≤ 72 chars.
-
-### 🌈 Tipos aceitos
-
-| Tipo         | Quando usar                         | Exemplo                                  |
-| ------------ | ----------------------------------- | ---------------------------------------- |
-| **feat**     | Nova funcionalidade                 | `feat(auth): adicionar login Google`     |
-| **fix**      | Correção de bug                     | `fix(core): tratar null no guard`        |
-| **perf**     | Melhoria de performance             | `perf(change-detection): evitar loops`   |
-| **refactor** | Refatoração sem mudar comportamento | `refactor(ui): extrair componente botão` |
-| **docs**     | Somente docs                        | `docs(readme): atualizar badges`         |
-| **style**    | Formatação, pontuação, espaços      | `style(app): padronizar imports`         |
-| **test**     | Adição/ajuste de testes             | `test(shared): mock de serviços`         |
-| **build**    | Mudanças no sistema de build        | `build(vite): atualizar plugin`          |
-| **ci**       | Alterações em pipelines             | `ci(github): cachear dependências`       |
-| **chore**    | Tarefas auxiliares, deps            | `chore(deps): bump rxjs 7.8`             |
-| **revert**   | Reversão de commit                  | `revert: feat(auth) quebrou login`       |
-
-> 💥 **Breaking change?** Use a seção `BREAKING CHANGE:` – o cz‑git oferece campo dedicado.
-
-**Dica**: mantenha escopos curtos em *kebab‑case* (`auth`, `routing`, `ui-button`). Para PRs de dependências use `deps`.
-
-## Renderização no Servidor (SSR) (SSR)
-
-1. **Build** SSR:
-
-   ```bash
-   npm run build           # produz browser + server bundles
-   ```
-2. **Serve**:
-
-   ```bash
-   npm run serve:ssr:my-app
-   # http://localhost:4000 (ajuste porta no server.ts)
-   ```
-3. O Express está em `src/server.ts` e pode receber middlewares (compression, helmet) conforme necessário.
-
----
-
-## CI/CD sugerido
-
-```yaml
-name: CI
-on:
-  push:
-    branches: [main]
-  pull_request:
-permissions:
-  contents: read
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test:ci -- --coverage
-      - run: npm run build
-```
-
-Para deploy SSR em produção recomendamos **Vercel** ou **Cloud Run**; ambos suportam Node 20.
-
----
-
-## Contribuição
-
-1. Crie um *branch* a partir de `main`.
-2. Siga o padrão `feat/nome-descritivo` ou `fix/...`.
-3. Certifique‑se de que `npm run lint && npm test` passam.
-4. Use `npm run commit` para mensagem.
-5. Abra o PR e descreva claramente o contexto.
-
----
-
-## Licença
-
-Distribuído sob licença MIT. Veja `LICENSE` para mais detalhes.
+*Desenvolvido com ❤️ por gucaciolato*
